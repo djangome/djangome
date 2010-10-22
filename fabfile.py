@@ -9,7 +9,7 @@ env.deployroot = unipath.Path('/home/web/djangome')
 
 def deploy():
     deploy_code()
-    update_deps()
+    run('restart django.me')
 
 def deploy_code():
     project.rsync_project(env.deployroot.parent, delete=True, exclude=['*.pyc'])

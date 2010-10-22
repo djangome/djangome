@@ -1,8 +1,9 @@
+import platform
 from unipath import FSPath as Path
 
 BASE = Path(__file__).parent
 
-DEBUG = TEMPLATE_DEBUG = True
+DEBUG = TEMPLATE_DEBUG = platform.node() != 'jacobian.org'
 MANAGERS = ADMINS = []
 
 TIME_ZONE = 'America/Chicago'
