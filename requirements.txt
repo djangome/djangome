@@ -1,0 +1,4 @@
+Sphinx
+Unipath
+-e svn+http://code.djangoproject.com/svn/django/trunk#egg=Django
+-e git+git://github.com/andymccurdy/redis-py.git#egg=redis

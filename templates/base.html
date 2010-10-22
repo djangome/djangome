@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <style type="text/css" media="screen">
+    #id_url { width: 80%; }
+    p.err { color: red; }
+    form { display: inline; }
+  </style>
+</head>
+<body>
+  <h1>{% block pagetitle %}{% endblock %}</h1>
+  {% block content %}{% endblock %}
+</body>
