@@ -17,7 +17,7 @@ SITE_ID = 1
 SECRET_KEY = 'b2@r_iu-3@#dm6+b2nt-iyu0n6#1j&!zt2a+3hw%9!_1k9!(2b'
 
 ROOT_URLCONF = 'djangome.urls'
-INSTALLED_APPS = ['djangome']
+INSTALLED_APPS = ['djangome', 'gunicorn']
 TEMPLATE_DIRS = [BASE.child('templates')]
 
 REDIS = {

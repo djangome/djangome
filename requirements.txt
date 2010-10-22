@@ -1,4 +1,6 @@
+gunicorn
 Sphinx
 Unipath
--e svn+http://code.djangoproject.com/svn/django/trunk#egg=Django
+-e svn+http://code.djangoproject.com/svn/django/trunk@14317#egg=Django
 -e git+git://github.com/andymccurdy/redis-py.git#egg=redis
+-e git+git://git.fabfile.org/fabric.git#egg=Fabric
