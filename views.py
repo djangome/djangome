@@ -67,7 +67,7 @@ def show_term(request, term):
     return render('show.html', {
         'term': term,
         'urls': get_urls(term),
-        'can_edit': True,
+        'can_edit': request.COOKIES.get('sekrit') == settings.SECRET_KEY,
     })
     
 def get_urls(term):

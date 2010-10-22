@@ -15,7 +15,7 @@ DATABASES = {}
 MIDDLEWARE_CLASSES = []
 
 SITE_ID = 1
-SECRET_KEY = 'b2@r_iu-3@#dm6+b2nt-iyu0n6#1j&!zt2a+3hw%9!_1k9!(2b'
+SECRET_KEY = open('/home/web/sekrit.txt').read().strip()
 
 ROOT_URLCONF = 'djangome.urls'
 INSTALLED_APPS = ['djangome', 'gunicorn']
