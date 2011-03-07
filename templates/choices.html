@@ -4,6 +4,7 @@
 {% block pagetitle %}Choose a redirect for <kbd>{{ term }}</kbd>:{% endblock %}
 
 {% block content %}
+  {% load url from future %}
   {% if winners %}
     <ul class="winners">
       {% for choice in winners  %}
@@ -18,7 +19,7 @@
       {% endfor %}
     </ul>
   {% endif %}
-  <form action="{% url redirect_to_term term %}" method="get">
+  <form action="{% url "redirect_to_term" version=version term=term %}" method="get">
     {% if form.errors %}<p class="err">{{ form.url.errors.as_text }}</p>{% endif %}
     <p>
       {{ form.url.label_tag }}
