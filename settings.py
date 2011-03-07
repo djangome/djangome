@@ -44,3 +44,8 @@ LOGGING = {
         },
     }
 }
+
+DJANGOME = {
+    'VERSIONS': ['dev', '1.2', '1.1', '1.0'],
+    'DEFAULT_VERSION': 'dev',
+}
