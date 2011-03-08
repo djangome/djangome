@@ -16,3 +16,6 @@ def deploy_code():
     
 def update_deps():
     run('%s/bin/pip install -r %s/requirements.txt' % (env.venv, env.deployroot))
+    
+def refresh_objects():
+    run('%s/bin/python %s/manage.py refresh_objects' % (env.venv, env.deployroot))
