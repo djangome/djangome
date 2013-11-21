@@ -18,13 +18,16 @@ DATABASES = {}
 MIDDLEWARE_CLASSES = []
 
 SITE_ID = 1
-SECRET_KEY = os.environ['SECUREKEY'].split(',')[0]
+
+_securekey_var = next(k for k in os.environ if k.startswith('SECUREKEY'))
+SECRET_KEY = os.environ[_securekey_var].split(',')[0]
 
 ROOT_URLCONF = 'djangome.urls'
 INSTALLED_APPS = ['djangome', 'gunicorn']
 TEMPLATE_DIRS = [BASE.child('templates')]
 
-REDIS_URL = os.environ['REDISCLOUD_URL']
+_redis_var = next(k for k in os.environ if k.startswith('REDIS'))
+REDIS_URL = os.environ[_redis_var]
 
 LOGGING = {
     'version': 1,
