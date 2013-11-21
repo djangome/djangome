@@ -1,4 +1,4 @@
-Copyright (c) 2013, Jacob Kaplan-Moss
+Copyright (c) 2013, Jacob Kaplan-Moss and contributors.
 
 All rights reserved.
 
