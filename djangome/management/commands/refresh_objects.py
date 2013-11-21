@@ -1,21 +1,26 @@
+from __future__ import print_function
+
 import redis
 import urllib
 import operator
 from django.conf import settings
 from django.core.management.base import NoArgsCommand
 from sphinx.ext import intersphinx
-        
-r = redis.Redis(**settings.REDIS)
+
+r = redis.StrictRedis.from_url(settings.REDIS_URL)
 
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         for version in settings.DJANGOME['VERSIONS']:
-            self.refresh_version(version)
-            
+            print('Refreshing', version)
+            termcount = self.refresh_version(version)
+            print(termcount, 'terms')
+
     def refresh_version(self, version):
+        termcount = 0
         inv = self.parse_sphinx_inventory(version)
-        
-        # I'm entirelty not sure this is even close to correct.
+
+        # I'm entirely not sure this is even close to correct.
         # There's a lot of info I'm throwing away here; revisit later?
         for keytype in inv:
             for term in inv[keytype]:
@@ -28,6 +33,9 @@ class Command(NoArgsCommand):
                 self.save_term(version, term, url, title)
                 if '.' in term:
                     self.save_term(version, term.split('.')[-1], url, title)
+                    termcount += 1
+
+        return termcount
 
     def parse_sphinx_inventory(self, version):
         # Parsing objects.inv is strange.
