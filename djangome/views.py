@@ -75,11 +75,12 @@ def redirect_to_term(request, version, term):
     })
 
 def show_term(request, version, term):
+    user_is_staff = request.user.is_staff
     return render(request, 'show.html', {
         'term': term,
         'version': version,
         'urls': get_urls(version, term),
-        'can_edit': request.COOKIES.get('sekrit') == settings.SECRET_KEY,
+        'can_edit': user_is_staff,
     })
 
 @csrf_exempt
