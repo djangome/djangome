@@ -8,6 +8,7 @@ from django.conf import settings
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.admin.views.decorators import staff_member_required
 
 r = redis.StrictRedis.from_url(settings.REDIS_URL)
 
@@ -82,12 +83,11 @@ def show_term(request, version, term):
     })
 
 @csrf_exempt
+@staff_member_required
 def manage_oneoffs(request):
     """
     Manage the hard-coded one-offs. Admins only.
     """
-    if request.COOKIES.get('sekrit') != settings.SECRET_KEY:
-        return http.HttpResponseNotAllowed()
 
     if request.method == 'POST':
         if 'action' in request.POST:
