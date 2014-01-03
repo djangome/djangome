@@ -12,18 +12,33 @@ TIME_ZONE = 'America/Chicago'
 LANGUAGE_CODE = 'en-us'
 USE_I18N = False
 USE_L10N = False
-WSGI_APPLICATION = 'scratch.wsgi.application'
+WSGI_APPLICATION = 'djangome.wsgi.application'
+STATIC_URL = '/static/'
 
-DATABASES = {}
-MIDDLEWARE_CLASSES = []
+try:
+    from local_settings import DATABASES
+except ImportError:
+    import dj_database_url
+    DATABASES = {}
+    DATABASES['default'] = dj_database_url.config()
 
 SITE_ID = 1
 
 _securekey_var = next(k for k in os.environ if k.startswith('SECUREKEY'))
 SECRET_KEY = os.environ[_securekey_var].split(',')[0]
 
+
 ROOT_URLCONF = 'djangome.urls'
-INSTALLED_APPS = ['djangome', 'gunicorn']
+INSTALLED_APPS = [
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.staticfiles',
+    'django.contrib.admin',
+
+    'djangome', 
+    'gunicorn'
+]
 TEMPLATE_DIRS = [BASE.child('templates')]
 
 _redis_var = next(k for k in os.environ if k.startswith('REDIS'))
