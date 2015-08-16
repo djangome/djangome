@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.admin',
 
-    'djangome', 
+    'djangome',
     'gunicorn'
 ]
 TEMPLATE_DIRS = [BASE.child('templates')]
@@ -63,6 +63,6 @@ LOGGING = {
 }
 
 DJANGOME = {
-    'VERSIONS': ['dev', '1.6', '1.5', '1.4', '1.3', '1.2', '1.1', '1.0'],
-    'DEFAULT_VERSION': '1.6',
+    'VERSIONS': ['dev', '1.9', '1.8', '1.7', '1.6', '1.5', '1.4', '1.3', '1.2', '1.1', '1.0'],
+    'DEFAULT_VERSION': '1.8',
 }
