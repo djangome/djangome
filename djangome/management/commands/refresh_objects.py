@@ -3,11 +3,15 @@ from __future__ import print_function
 import redis
 import urllib
 import operator
+import requests
+
 from django.conf import settings
 from django.core.management.base import NoArgsCommand
 from sphinx.ext import intersphinx
 
+
 r = redis.StrictRedis.from_url(settings.REDIS_URL)
+
 
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
@@ -40,9 +44,13 @@ class Command(NoArgsCommand):
     def parse_sphinx_inventory(self, version):
         # Parsing objects.inv is strange.
         urlpattern = 'http://docs.djangoproject.com/en/%s/%%s' % version
-        fp = urllib.urlopen(urlpattern % '_objects/')
-        fp.readline()
-        return intersphinx.read_inventory_v2(fp, urlpattern, operator.mod)
+        sphinx_index = urlpattern % '_objects/'
+        req = requests.get(sphinx_index)
+        if req.status_code in [200, 301]:
+            fp = urllib.urlopen(sphinx_index)
+            fp.readline()
+            return intersphinx.read_inventory_v2(fp, urlpattern, operator.mod)
+        return []
 
     def save_term(self, version, term, url, title):
         r.sadd('redirects:v2:%s:%s' % (version, term), url)
